@@ -1,0 +1,147 @@
+{>"layout" /}
+
+{< body} 
+<hr>
+<div>
+  <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#formModal">
+    Add a new Recipe!
+  </button>
+  </div>
+  <br>
+  <br>
+  {#recipes}
+
+
+<div class="card card-body bg-light">
+    <h4>{name}
+    <button class="btn btn-success float-right" type="button" data-toggle="collapse" data-target="#recipe_{id}" aria-expanded="false" aria-controls="recipe_{id}">
+        View
+    </button>
+</h4> 
+
+    <div class="collapse" id="recipe_{id}">
+        <div class="card card-body  text-left">
+          <p><strong>Ingredients: </strong><br>{ingredients}</p>
+          <br>
+          <p><strong>Directions: </strong><br>{directions}</p>
+         
+          <hr>
+        
+          <div>
+            <a class="btn btn-primary float-left edit-recipe" 
+            data-toggle="modal" data-target="#editFormModal" 
+            data-id="{id}" 
+            data-name="{name}" 
+            data-ingredients="{ingredients}" 
+            data-direction="{directions}"><i class="fas fa-edit"></i></a>
+
+           
+
+            <a class="btn btn-danger float-right delete-recipe" onclick="return confirm('Are you sure you wish to permanently delete this recipe??')" href="http://localhost:3000/delete/{id}"><i class="far fa-trash-alt"></i></a>
+      </div>
+        </div>
+
+       
+      </div>   
+</div>
+
+
+
+
+{/recipes}
+
+
+<!--Add Recipe modal-->
+<div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="formModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+
+        <form method="POST" action="/add">
+
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add Recipe</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+         
+
+<div class="form-group">
+    <label for="name">Name</label>
+        <input class="form-control" type="text" name="name">    
+</div>
+
+<div class="form-group">
+    <label for="ingredients">Ingredients</label>
+        <textarea class="form-control" name="ingredients" id="" cols="30" rows="10"></textarea>
+</div>
+
+<div class="form-group">
+    <label for="directions">Directions</label>
+        <textarea class="form-control"  name="directions" id="" cols="30" rows="10"></textarea>  
+</div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Save changes</button>
+        </div>
+
+    </form>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+  <!--Edit Recipe modal-->
+  
+  <div class="modal fade" id="editFormModal" tabindex="-1" role="dialog" aria-labelledby="editFormModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+  
+        <form method="POST" action="/edit">
+  <input type="hidden" name="id" id="edit-form-id">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit Recipe</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+         
+  
+  <div class="form-group">
+    <label for="name">Name</label>
+        <input class="form-control" type="text" name="name" id="edit-form-name" >    
+  </div>
+  
+  <div class="form-group">
+    <label for="ingredients">Ingredients</label>
+        <textarea class="form-control" name="ingredients" id="edit-form-ingredients" cols="30" rows="10"></textarea>
+  </div>
+  
+  <div class="form-group">
+    <label for="directions">Directions</label>
+        <textarea class="form-control"  name="directions" id="edit-form-directions" cols="30" rows="10"></textarea>  
+  </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Update recipe</button>
+        </div>
+  
+    </form>
+      </div>
+    </div>
+  </div>
+  
+
+
+{/body}
